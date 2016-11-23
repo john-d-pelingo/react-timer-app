@@ -1,0 +1,18 @@
+.top-bar {
+  background-color: #333333;
+}
+
+.top-bar ul {
+  background-color: #333333;
+}
+
+.top-bar .menu-text {
+  color: #ffffff;
+}
+
+.top-bar .menu > .menu-text > a {
+  display: inline;
+  padding: 0;
+}
+
+/*# sourceMappingURL=app.css.map */
