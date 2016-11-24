@@ -35,15 +35,10 @@ var Main = function Main(props) {
         React.createElement(Navigation, null),
         React.createElement(
             'div',
-            null,
+            { className: 'row' },
             React.createElement(
                 'div',
-                null,
-                React.createElement(
-                    'p',
-                    null,
-                    'Main.jsx'
-                ),
+                { className: 'column small-centered medium-6 large-4' },
                 props.children
             )
         )
