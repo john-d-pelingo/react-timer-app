@@ -30,8 +30,8 @@ let Main = (props) => {
     return (
         <div>
             <Navigation />
-            <div className="row">
-                <div className="columns medium-6 large-4 small-centered">
+            <div>
+                <div>
                     <p>Main.jsx</p>
                     {props.children}
                 </div>
