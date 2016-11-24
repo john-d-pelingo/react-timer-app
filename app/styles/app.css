@@ -6,13 +6,17 @@
   background-color: #333333;
 }
 
-.top-bar .menu-text {
-  color: #ffffff;
-}
-
 .top-bar .menu > .menu-text > a {
   display: inline;
   padding: 0;
+}
+
+.top-bar .menu .menu-text {
+  color: #ffffff;
+}
+
+.top-bar .menu .active {
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=app.css.map */

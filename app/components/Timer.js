@@ -10,9 +10,9 @@ var Timer = React.createClass({
             'div',
             null,
             React.createElement(
-                'h1',
+                'p',
                 null,
-                'Timer component'
+                'Timer.jsx'
             )
         );
     }

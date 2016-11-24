@@ -16,22 +16,26 @@ module.exports = function (config) {
         singleRun    : true,
         // Use the mocha framework for tests
         frameworks   : ['mocha'],
+        // Which test files to run
         // Globing pattern
         // We want to get files in the test folder or in any folder in the test folder (subdirectory)
         // that have a file name of anything but end in .test.jsx
         files        : ['app/tests/**/*.test.jsx'],
+        // Which preprocessors to use
         // Things we wanna do with our test files
         // For any of the specified files we wanna run webpack and sourcemap
         preprocessors: {
             'app/tests/**/*.test.jsx': ['webpack', 'sourcemap']
         },
+        // Clean up the output
         // Shows which things passed and which things failed
         reporters    : ['mocha'],
         // Test timeouts
-        // If a test never ends, cancel it at a certain point of time
+        // Send details down into the individual framework
         client       : {
             // Use mocha
             mocha: {
+                // If a test never ends, cancel it at a certain point of time
                 // 5 seconds
                 timeout: '5000'
             }

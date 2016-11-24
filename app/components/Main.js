@@ -42,7 +42,7 @@ var Main = function Main(props) {
                 React.createElement(
                     'p',
                     null,
-                    'Main.jsx Rendered'
+                    'Main.jsx'
                 ),
                 props.children
             )

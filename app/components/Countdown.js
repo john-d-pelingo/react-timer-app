@@ -10,9 +10,9 @@ var Countdown = React.createClass({
             'div',
             null,
             React.createElement(
-                'h1',
+                'p',
                 null,
-                'Countdown component'
+                'Countdown.jsx'
             )
         );
     }
