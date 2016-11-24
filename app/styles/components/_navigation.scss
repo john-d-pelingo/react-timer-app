@@ -5,12 +5,18 @@
         background-color : $nav-background;
     }
 
-    .menu-text {
-        color : $white;
-    }
+    .menu {
+        > .menu-text > a {
+            display : inline;
+            padding : 0;
+        }
 
-    .menu > .menu-text > a {
-        display : inline;
-        padding : 0;
+        .menu-text {
+            color : $white;
+        }
+
+        .active {
+            font-weight : bold;
+        }
     }
 }
