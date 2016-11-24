@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react');
+var Clock = require('Clock');
 
 var Countdown = React.createClass({
     displayName: 'Countdown',
@@ -9,11 +10,7 @@ var Countdown = React.createClass({
         return React.createElement(
             'div',
             null,
-            React.createElement(
-                'p',
-                null,
-                'Countdown.jsx'
-            )
+            React.createElement(Clock, { totalSeconds: 198 })
         );
     }
 });
