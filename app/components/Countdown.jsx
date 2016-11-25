@@ -3,21 +3,16 @@ let Clock = require('Clock');
 let CountdownForm = require('CountdownForm');
 let Controls = require('Controls');
 
+// This component will handle all of the logic of the countdown functionality
 let Countdown = React.createClass({
-    getInitialState   : function () {
-        return {
-            count          : 0,
-            countdownStatus: 'stopped'
-        };
-    },
     // Will get fired as our component gets first mounted
     // Means that we don't have access to the refs or the DOM
-    componentWillMount: function () {
+    componentWillMount  : function () {
         // console.log('componentWillMount');
     },
     // Gets fired right after everything gets rendered in the DOM
     // This means that we will have access to any refs
-    componentDidMount : function () {
+    componentDidMount   : function () {
         // console.log('componentDidMount');
     },
     // Gets fired before the fact
@@ -32,9 +27,9 @@ let Countdown = React.createClass({
         if (this.state.countdownStatus !== prevState.countdownStatus) {
             switch (this.state.countdownStatus) {
                 case 'started':
-                    this.startTimer();
+                    this.startCountdown();
                     break;
-                // When stopped we reset the count and also cancel the set interval
+                // When set the state to stopped or paused we reset the count and also cancel the set interval
                 // Which means we have a fallthrough and it is acceptable in this case
                 case 'stopped':
                     this.setState({count: 0});
@@ -49,13 +44,19 @@ let Countdown = React.createClass({
     // Automatically gets fired by React right before our component gets removed from the DOM
     // In this case will get fired when we click at the menu links
     componentWillUnmount: function () {
-        console.log('componentWillUnmount');
+        // console.log('componentWillUnmount');
         // Stop the interval
         clearInterval(this.timer);
         this.timer = undefined;
     },
+    getInitialState     : function () {
+        return {
+            count          : 0,
+            countdownStatus: 'stopped'
+        };
+    },
     // Start the timer
-    startTimer          : function () {
+    startCountdown      : function () {
         // Trigger a function once after a certain amount of time
         // setTimeout();
         // Keep triggering a function every interval
@@ -70,18 +71,19 @@ let Countdown = React.createClass({
             // If we have reached the end of the countdown then there is no reason to keep the timer around
             if (newCount === 0) {
                 this.setState({
-                    countdownStatus : 'stopped'
+                    countdownStatus: 'stopped'
                 });
             }
         }, 1000);
     },
+    // Used by the CountdownForm component
     handleSetCountdown  : function (seconds) {
         this.setState({
             count          : seconds,
             countdownStatus: 'started'
         });
     },
-    //
+    // Used by the Controls component
     handleStatusChange  : function (newStatus) {
         this.setState({
             countdownStatus: newStatus
