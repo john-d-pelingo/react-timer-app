@@ -13,16 +13,17 @@ let Countdown = React.createClass({
     // Will get fired as our component gets first mounted
     // Means that we don't have access to the refs or the DOM
     componentWillMount: function () {
-        console.log('componentWillMount');
+        // console.log('componentWillMount');
     },
     // Gets fired right after everything gets rendered in the DOM
     // This means that we will have access to any refs
     componentDidMount : function () {
-        console.log('componentDidMount');
+        // console.log('componentDidMount');
     },
     // Gets fired before the fact
     // Gets passed on the next props and the next state
     componentWillUpdate : function (nextProps, nextState) {
+        // console.log('componentWillUpdate');
 
     },
     // Lifecycle methods !!!
@@ -105,7 +106,8 @@ let Countdown = React.createClass({
         };
 
         return (
-            <div>
+            <div className="countdown">
+                <h1 className="page-title">Countdown App</h1>
                 <Clock totalSeconds={count}/>
                 {renderControlArea()}
             </div>

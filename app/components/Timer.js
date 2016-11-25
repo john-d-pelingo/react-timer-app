@@ -1,18 +1,18 @@
-'use strict';
+"use strict";
 
 var React = require('react');
 
 var Timer = React.createClass({
-    displayName: 'Timer',
+    displayName: "Timer",
 
     render: function render() {
         return React.createElement(
-            'div',
-            null,
+            "div",
+            { className: "timer" },
             React.createElement(
-                'p',
-                null,
-                'Timer.jsx'
+                "h1",
+                { className: "page-title" },
+                "Timer App"
             )
         );
     }
