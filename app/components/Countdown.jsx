@@ -10,8 +10,24 @@ let Countdown = React.createClass({
             countdownStatus: 'stopped'
         };
     },
-    // Gets called after either props or state get updated
-    componentDidUpdate: function (prevProps, prevState) {
+    // Will get fired as our component gets first mounted
+    // Means that we don't have access to the refs or the DOM
+    componentWillMount: function () {
+        console.log('componentWillMount');
+    },
+    // Gets fired right after everything gets rendered in the DOM
+    // This means that we will have access to any refs
+    componentDidMount : function () {
+        console.log('componentDidMount');
+    },
+    // Gets fired before the fact
+    // Gets passed on the next props and the next state
+    componentWillUpdate : function (nextProps, nextState) {
+
+    },
+    // Lifecycle methods !!!
+    // Gets fired right after either props or state get updated
+    componentDidUpdate  : function (prevProps, prevState) {
         if (this.state.countdownStatus !== prevState.countdownStatus) {
             switch (this.state.countdownStatus) {
                 case 'started':
@@ -29,8 +45,16 @@ let Countdown = React.createClass({
             }
         }
     },
+    // Automatically gets fired by React right before our component gets removed from the DOM
+    // In this case will get fired when we click at the menu links
+    componentWillUnmount: function () {
+        console.log('componentWillUnmount');
+        // Stop the interval
+        clearInterval(this.timer);
+        this.timer = undefined;
+    },
     // Start the timer
-    startTimer        : function () {
+    startTimer          : function () {
         // Trigger a function once after a certain amount of time
         // setTimeout();
         // Keep triggering a function every interval
@@ -43,21 +67,26 @@ let Countdown = React.createClass({
             });
 
             // If we have reached the end of the countdown then there is no reason to keep the timer around
+            if (newCount === 0) {
+                this.setState({
+                    countdownStatus : 'stopped'
+                });
+            }
         }, 1000);
     },
-    handleSetCountdown: function (seconds) {
+    handleSetCountdown  : function (seconds) {
         this.setState({
             count          : seconds,
             countdownStatus: 'started'
         });
     },
     //
-    handleStatusChange: function (newStatus) {
+    handleStatusChange  : function (newStatus) {
         this.setState({
             countdownStatus: newStatus
         });
     },
-    render            : function () {
+    render              : function () {
         let {count, countdownStatus} = this.state;
 
         // When we want to dynamically render something we have to a use a function

@@ -14,7 +14,21 @@ var Countdown = React.createClass({
             countdownStatus: 'stopped'
         };
     },
-    // Gets called after either props or state get updated
+    // Will get fired as our component gets first mounted
+    // Means that we don't have access to the refs or the DOM
+    componentWillMount: function componentWillMount() {
+        console.log('componentWillMount');
+    },
+    // Gets fired right after everything gets rendered in the DOM
+    // This means that we will have access to any refs
+    componentDidMount: function componentDidMount() {
+        console.log('componentDidMount');
+    },
+    // Gets fired before the fact
+    // Gets passed on the next props and the next state
+    componentWillUpdate: function componentWillUpdate(nextProps, nextState) {},
+    // Lifecycle methods !!!
+    // Gets fired right after either props or state get updated
     componentDidUpdate: function componentDidUpdate(prevProps, prevState) {
         if (this.state.countdownStatus !== prevState.countdownStatus) {
             switch (this.state.countdownStatus) {
@@ -33,6 +47,14 @@ var Countdown = React.createClass({
             }
         }
     },
+    // Automatically gets fired by React right before our component gets removed from the DOM
+    // In this case will get fired when we click at the menu links
+    componentWillUnmount: function componentWillUnmount() {
+        console.log('componentWillUnmount');
+        // Stop the interval
+        clearInterval(this.timer);
+        this.timer = undefined;
+    },
     // Start the timer
     startTimer: function startTimer() {
         var _this = this;
@@ -49,6 +71,11 @@ var Countdown = React.createClass({
             });
 
             // If we have reached the end of the countdown then there is no reason to keep the timer around
+            if (newCount === 0) {
+                _this.setState({
+                    countdownStatus: 'stopped'
+                });
+            }
         }, 1000);
     },
     handleSetCountdown: function handleSetCountdown(seconds) {
