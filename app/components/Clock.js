@@ -6,8 +6,9 @@ var Clock = React.createClass({
     displayName: 'Clock',
 
     getDefaultProps: function getDefaultProps() {
+        // In case the prop total Seconds is not set, we initialize it to 0
         return {
-            totalSeconds: 0
+            // totalSeconds: 0
         };
     },
     propTypes: {

@@ -14,7 +14,6 @@ let Controls = React.createClass({
             // this.props.onStatusChange is what is passed from the parent component which is a function
             // and this is what is called when someone clicks a button
             this.props.onStatusChange(newStatus);
-            ;
         };
     },
     componentWillReceiveProps : function (newProps) {
@@ -27,7 +26,7 @@ let Controls = React.createClass({
         let renderStartStopButton = () => {
             if (countdownStatus === 'started') {
                 return <button className="button secondary" onClick={this.onStatusChange('paused')}>Pause</button>;
-            } else if (countdownStatus === 'paused') {
+            } else if (countdownStatus === 'paused' || countdownStatus === 'stopped') {
                 return <button className="button primary" onClick={this.onStatusChange('started')}>Start</button>;
             }
         };
