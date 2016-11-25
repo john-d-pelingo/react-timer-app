@@ -47,6 +47,7 @@ module.exports = {
             Countdown        : 'app/components/Countdown.jsx',
             Clock            : 'app/components/Clock.jsx',
             CountdownForm    : 'app/components/CountdownForm.jsx',
+            Controls         : 'app/components/Controls.jsx',
             applicationStyles: 'app/styles/app.scss'
         },
         // List of file extensions that we want to process
