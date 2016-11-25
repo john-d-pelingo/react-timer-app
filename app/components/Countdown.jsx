@@ -1,6 +1,7 @@
 let React = require('react');
 let Clock = require('Clock');
 let CountdownForm = require('CountdownForm');
+let Controls = require('Controls');
 
 let Countdown = React.createClass({
     getInitialState   : function () {
@@ -15,6 +16,15 @@ let Countdown = React.createClass({
             switch (this.state.countdownStatus) {
                 case 'started':
                     this.startTimer();
+                    break;
+                // When stopped we reset the count and also cancel the set interval
+                // Which means we have a fallthrough and it is acceptable in this case
+                case 'stopped':
+                    this.setState({count: 0});
+                // In contrast to paused where we just cancel the set interval
+                case 'paused':
+                    clearInterval(this.timer);
+                    this.timer = undefined;
                     break;
             }
         }
@@ -41,13 +51,34 @@ let Countdown = React.createClass({
             countdownStatus: 'started'
         });
     },
+    //
+    handleStatusChange: function (newStatus) {
+        this.setState({
+            countdownStatus: newStatus
+        });
+    },
     render            : function () {
-        let {count} = this.state;
+        let {count, countdownStatus} = this.state;
+
+        // When we want to dynamically render something we have to a use a function
+        let renderControlArea = () => {
+            if (countdownStatus !== 'stopped') {
+                // If not stopped render the controls
+                return <Controls countdownStatus={countdownStatus}
+                                 onStatusChange={this.handleStatusChange}/>
+            } else {
+                // If stopped render the countdown form
+                // Pass down a function as a prop, we can wait for actions to get fired on the children
+                // and then do something with those
+                // Which is why we don't call it here
+                return <CountdownForm onSetCountdown={this.handleSetCountdown}/>
+            }
+        };
 
         return (
             <div>
                 <Clock totalSeconds={count}/>
-                <CountdownForm onSetCountdown={this.handleSetCountdown}/>
+                {renderControlArea()}
             </div>
         );
     }

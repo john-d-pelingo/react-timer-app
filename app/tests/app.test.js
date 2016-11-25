@@ -6,7 +6,7 @@ var expect = require('expect');
 describe('App', function () {
     // Specify the test name
     // What the test should do
-    it('should properly run test', function () {
+    it('should properly run a test', function () {
         expect(1).toBe(1);
     });
 });
