@@ -3,6 +3,7 @@
 var React = require('react');
 var Clock = require('Clock');
 var CountdownForm = require('CountdownForm');
+var Controls = require('Controls');
 
 var Countdown = React.createClass({
     displayName: 'Countdown',
@@ -19,6 +20,15 @@ var Countdown = React.createClass({
             switch (this.state.countdownStatus) {
                 case 'started':
                     this.startTimer();
+                    break;
+                // When stopped we reset the count and also cancel the set interval
+                // Which means we have a fallthrough and it is acceptable in this case
+                case 'stopped':
+                    this.setState({ count: 0 });
+                // In contrast to paused where we just cancel the set interval
+                case 'paused':
+                    clearInterval(this.timer);
+                    this.timer = undefined;
                     break;
             }
         }
@@ -47,19 +57,44 @@ var Countdown = React.createClass({
             countdownStatus: 'started'
         });
     },
+    //
+    handleStatusChange: function handleStatusChange(newStatus) {
+        this.setState({
+            countdownStatus: newStatus
+        });
+    },
     render: function render() {
-        var count = this.state.count;
+        var _this2 = this;
 
+        var _state = this.state,
+            count = _state.count,
+            countdownStatus = _state.countdownStatus;
+
+        // When we want to dynamically render something we have to a use a function
+
+        var renderControlArea = function renderControlArea() {
+            if (countdownStatus !== 'stopped') {
+                // If not stopped render the controls
+                return React.createElement(Controls, { countdownStatus: countdownStatus,
+                    onStatusChange: _this2.handleStatusChange });
+            } else {
+                // If stopped render the countdown form
+                // Pass down a function as a prop, we can wait for actions to get fired on the children
+                // and then do something with those
+                // Which is why we don't call it here
+                return React.createElement(CountdownForm, { onSetCountdown: _this2.handleSetCountdown });
+            }
+        };
 
         return React.createElement(
             'div',
             null,
             React.createElement(Clock, { totalSeconds: count }),
-            React.createElement(CountdownForm, { onSetCountdown: this.handleSetCountdown })
+            renderControlArea()
         );
     }
 });
 
 module.exports = Countdown;
 
-//# sourceMappingURL=Countdown.test.jsst.js.map
+//# sourceMappingURL=Countdown.js.map
