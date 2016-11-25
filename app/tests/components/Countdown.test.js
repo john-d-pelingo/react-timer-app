@@ -25,8 +25,8 @@ describe('Countdown', function () {
             expect(countdown.state.countdownStatus).toBe('started');
 
             // Test that after just over a second the count gets updated
-            // Asynchronous
-            // Mocha doesn't support asynchronous
+            // setTimeout is asynchronous
+            // Mocha doesn't support asynchronous so we use done
             setTimeout(function () {
                 expect(countdown.state.count).toBe(9);
                 done();
@@ -41,6 +41,34 @@ describe('Countdown', function () {
                 expect(countdown.state.count).toBe(0);
                 done();
             }, 2001);
+        });
+
+        it('should pause countdown on paused status', function (done) {
+            var countdown = TestUtils.renderIntoDocument(React.createElement(Countdown, null));
+            countdown.handleSetCountdown(3);
+
+            // The state should be paused now
+            countdown.handleStatusChange('paused');
+
+            setTimeout(function () {
+                expect(countdown.state.count).toBe(3);
+                expect(countdown.state.countdownStatus).toBe('paused');
+                done();
+            }, 1001);
+        });
+
+        it('should stop countdown on stopped status', function (done) {
+            var countdown = TestUtils.renderIntoDocument(React.createElement(Countdown, null));
+            countdown.handleSetCountdown(3);
+
+            // The state should be stopped now
+            countdown.handleStatusChange('stopped');
+
+            setTimeout(function () {
+                expect(countdown.state.count).toBe(0);
+                expect(countdown.state.countdownStatus).toBe('stopped');
+                done();
+            }, 1001);
         });
     });
 });
