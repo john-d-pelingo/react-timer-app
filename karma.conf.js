@@ -20,7 +20,12 @@ module.exports = function (config) {
         // Globing pattern
         // We want to get files in the test folder or in any folder in the test folder (subdirectory)
         // that have a file name of anything but end in .test.jsx
-        files        : ['app/tests/**/*.test.jsx'],
+        files        : [
+            // Allow jQuery in our components
+            'node_modules/jquery/dist/jquery.min.js',
+            'node_modules/foundation-sites/dist/foundation.min.js',
+            'app/tests/**/*.test.jsx',
+        ],
         // Which preprocessors to use
         // Things we wanna do with our test files
         // For any of the specified files we wanna run webpack and sourcemap
