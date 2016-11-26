@@ -1,7 +1,7 @@
 {
-  "name": "react-weather",
-  "version": "1.0.0",
-  "description": "react-webpack-boilerplate",
+  "name": "react-timer-app",
+  "version": "0.1.1",
+  "description": "react-timer-app",
   "main": "index.js",
   "scripts": {
     "test": "karma start",
