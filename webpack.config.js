@@ -1,10 +1,12 @@
 let webpack = require('webpack');
+let path = require('path');
 
 module.exports = {
     // Where to start processing our code
     // Inputs
     entry    : [
         // script! is to package the scripts to webpack
+        // In other words, allow jQuery in our components
         'script!jquery/dist/jquery.min.js',
         'script!foundation-sites/dist/foundation.min.js',
         './app/app.jsx'
@@ -70,6 +72,14 @@ module.exports = {
                 // Tell which folders we don't want to have parsed
                 exclude: /(node_modules|bower_components)/
             }
+        ]
+    },
+    // Include the sass files made by foundation-sites
+    // We can override their variables to fit our needs
+    sassLoader: {
+        includePaths: [
+            // Lets us combine 2 paths
+            path.resolve(__dirname, './node_modules/foundation-sites/scss')
         ]
     },
     // Create source map which are very important debugging tools
