@@ -27,6 +27,7 @@ describe('CountdownForm', () => {
         TestUtils.Simulate.submit($el.find('form')[0]);
 
         // Make sure the spy was called at least once
+        // Activate the form submit
         expect(spy).toHaveBeenCalledWith(109);
     });
 

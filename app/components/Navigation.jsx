@@ -1,5 +1,5 @@
 let React = require('react');
-var {Link, IndexLink} = require('react-router');
+let {Link, IndexLink} = require('react-router');
 
 // Link provides us with the ability to add custom styles and classes to the link that is for the current page.
 // Route corresponds to Link

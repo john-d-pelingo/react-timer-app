@@ -1,5 +1,5 @@
 let React = require('react');
-// ss
+
 let Navigation = require('Navigation');
 
 // Presentational/Dumb component
